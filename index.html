@@ -15,9 +15,6 @@
                 border-color: white;
                 color: white;
             }
-            #container {
-                position: relative
-            }
             
     </style>
 </head>
@@ -28,10 +25,56 @@
         <h4> By Skyler Goh</h4>
     </div>
     <div id="container">
-        <canvas class="canvas" id="grid"    width= "800px" height= "300px"></canvas>
-        <canvas class="canvas" id="dynamic" width= "800px" height= "300px" style="border:1px solid rgb(0,255,255);"></canvas>
-        <canvas class="canvas" id="Barrier" width= "800px" height= "300px"></canvas>
+        <canvas class="canvas" id="grid"    width= "800px" height= "500px"></canvas>
+        <canvas class="canvas" id="dynamic" width= "800px" height= "500px" style="border:1px solid rgb(0,255,255);"></canvas>
+        <canvas class="canvas" id="Barrier" width= "800px" height= "500px"></canvas>
     </div>
+			
+<script>
+//var-------------=----------------------------------------
+var frameNo= 0;
+var GRate = 10;
+var CanvasArea = {
+    dynCanvas : document.getElementById("#dynamic"),
+    move :[],
+    create: function() {
+        this.dynContext = this.dynCanvas.getContent("2d");
+        this.WebFrame = setInterval(updating,GRate);
+    }
+};
+//functions------------------------------------------------
+function entity (widthA,heightA,colorA,xA,yA) {
+    this.width = widthA;
+    this.height = heightA;
+    this.x = xA;
+    this.y = yA;
+    this.color = colorA;
+        this.print1 =  function (){
+    var ctx =  CanvasArea.dynContext;
+    ctx.fillstyle = this.color;
+    ctx.fillrect(this.x,this.y,this.width,this.height);
+}
+        this.delete1 = function (){
+    var ctx = CanvasArea.dynContext;
+    ctx.clearRect(this.x,this.y,this.width,this.height);
+    } 
+        this.update = function () {
+    this.delete1();
+    this.print1();
+    }
+}
+//var entities --- - --- - -- - - -- - -- - - - -- - - -- 
+var square = new entity (30,30,"#ffffff",200,300);
+//main-----------------------------------------------
+    function start () {
+        CanvasArea.create
+    };
+    function updating () {
+        frameNo++;
+        square.delete1();
+        square.print1();
+    };
+</script>
 </body>
 
 </html>
